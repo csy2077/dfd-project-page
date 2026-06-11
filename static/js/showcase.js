@@ -1,28 +1,40 @@
-// showcase.js — interactive qualitative-results panel.
+// showcase.js — qualitative-results panels, one independent section per task.
 //
-// Top:    three task buttons (Image-to-Video / Autoregressive / Text-to-Video).
-// Stage:  [ prompt + small Teacher | big DFD (ours) | big DMD baseline ].
-// Bottom: filmstrip of static first-frame thumbnails; click to switch case.
+// Each panel:
+//   Stage:  [ prompt + small Teacher | big DFD (ours) | big DMD baseline ]
+//   Bottom: filmstrip of static first-frame thumbnails; click to switch case.
 //
 // Case data lives in static/data/showcase.json (built by the asset pipeline).
 
 const DATA_URL = "static/data/showcase.json";
 
-export async function mountShowcase(root) {
-  let data;
-  try {
-    data = await (await fetch(DATA_URL)).json();
-  } catch (e) {
-    root.innerHTML = "<p class='sc-error'>Showcase data unavailable.</p>";
-    return;
-  }
+let _dataPromise = null;
+function loadData() {
+  if (!_dataPromise) _dataPromise = fetch(DATA_URL).then(r => r.json());
+  return _dataPromise;
+}
 
-  const tasks = data.tasks || [];
-  if (!tasks.length) return;
+// Mount the panel for one task ("i2v" | "ar" | "t2v") into `root`.
+export function makeTaskShowcase(taskId) {
+  return async function mount(root) {
+    let data;
+    try {
+      data = await loadData();
+    } catch (e) {
+      root.innerHTML = "<p class='sc-error'>Showcase data unavailable.</p>";
+      return;
+    }
+    const task = (data.tasks || []).find(t => t.id === taskId);
+    if (!task) {
+      root.innerHTML = "<p class='sc-error'>No results for this task.</p>";
+      return;
+    }
+    buildPanel(root, task);
+  };
+}
 
-  // ---------- skeleton ----------
+function buildPanel(root, task) {
   root.innerHTML = `
-    <div class="sc-task-nav" role="tablist"></div>
     <p class="sc-note"></p>
     <div class="sc-stage">
       <div class="sc-side">
@@ -47,7 +59,6 @@ export async function mountShowcase(root) {
     <div class="sc-strip" role="listbox" aria-label="Choose a result"></div>
   `;
 
-  const nav        = root.querySelector(".sc-task-nav");
   const note       = root.querySelector(".sc-note");
   const promptBox  = root.querySelector(".sc-prompt-box");
   const promptText = root.querySelector(".sc-prompt-text");
@@ -57,20 +68,10 @@ export async function mountShowcase(root) {
   const dmdLabel   = root.querySelector(".sc-label-dmd");
   const strip      = root.querySelector(".sc-strip");
 
-  let taskIdx = 0;
-  let caseIdx = 0;
+  note.textContent = task.note || "";
+  dmdLabel.textContent = task.baseline || "DMD";
 
-  // ---------- task buttons ----------
-  const taskBtns = tasks.map((t, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "sc-task-btn";
-    b.textContent = t.label;
-    b.setAttribute("role", "tab");
-    b.addEventListener("click", () => { taskIdx = i; caseIdx = 0; renderTask(); });
-    nav.appendChild(b);
-    return b;
-  });
+  let caseIdx = 0;
 
   function setVideo(el, src) {
     if (el.getAttribute("src") === src) return;
@@ -81,7 +82,6 @@ export async function mountShowcase(root) {
   }
 
   function renderCase() {
-    const task = tasks[taskIdx];
     const c = task.cases[caseIdx];
 
     // prompt (blank box for i2v)
@@ -103,30 +103,20 @@ export async function mountShowcase(root) {
     });
   }
 
-  function renderTask() {
-    const task = tasks[taskIdx];
-    taskBtns.forEach((b, i) => b.classList.toggle("is-active", i === taskIdx));
-    note.textContent = task.note || "";
-    dmdLabel.textContent = task.baseline || "DMD";
+  task.cases.forEach((c, i) => {
+    const t = document.createElement("button");
+    t.type = "button";
+    t.className = "sc-thumb";
+    t.setAttribute("role", "option");
+    t.title = c.title;
+    t.innerHTML = `<img src="${c.thumb}" alt="${c.title}" loading="lazy"><span>${c.title}</span>`;
+    t.addEventListener("click", () => { caseIdx = i; renderCase(); });
+    strip.appendChild(t);
+  });
 
-    strip.innerHTML = "";
-    task.cases.forEach((c, i) => {
-      const t = document.createElement("button");
-      t.type = "button";
-      t.className = "sc-thumb";
-      t.setAttribute("role", "option");
-      t.title = c.title;
-      t.innerHTML = `<img src="${c.thumb}" alt="${c.title}" loading="lazy"><span>${c.title}</span>`;
-      t.addEventListener("click", () => { caseIdx = i; renderCase(); });
-      strip.appendChild(t);
-    });
+  renderCase();
 
-    renderCase();
-  }
-
-  renderTask();
-
-  // Pause the showcase videos when scrolled far off-screen; resume when back.
+  // Stream only the panel(s) currently on screen.
   if ("IntersectionObserver" in window) {
     const vids = [vTeacher, vDfd, vDmd];
     const io = new IntersectionObserver((entries) => {

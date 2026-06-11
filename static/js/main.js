@@ -1,13 +1,15 @@
-import { mountShowcase } from './showcase.js';
+import { makeTaskShowcase } from './showcase.js';
 import { mountAbstract, mountMethod, mountQuant, mountLimitation } from './static_sections.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const map = {
-    "showcase-root":   mountShowcase,
-    "abstract-root":   mountAbstract,
-    "method-root":     mountMethod,
-    "quant-root":      mountQuant,
-    "limitation-root": mountLimitation,
+    "results-i2v-root": makeTaskShowcase("i2v"),
+    "results-ar-root":  makeTaskShowcase("ar"),
+    "results-t2v-root": makeTaskShowcase("t2v"),
+    "abstract-root":    mountAbstract,
+    "method-root":      mountMethod,
+    "quant-root":       mountQuant,
+    "limitation-root":  mountLimitation,
   };
   for (const [id, fn] of Object.entries(map)) {
     const el = document.getElementById(id);

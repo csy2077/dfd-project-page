@@ -1168,13 +1168,15 @@ video {
 /* 1. breathing room between Paper/Code buttons and the takeaway pills */
 .page-header .teaser-pills { margin-top: 3.25rem; }
 
-/* 2. Qualitative Results spans the full page width */
-#showcase {
+/* 2. Qualitative-results sections span the full page width */
+.section-showcase {
   max-width: none;
   padding-left: clamp(1.25rem, 3vw, 3.5rem);
   padding-right: clamp(1.25rem, 3vw, 3.5rem);
 }
-#showcase .sc-stage { min-height: 46vh; }
+.section-showcase .sc-stage { min-height: 46vh; }
+/* tighter rhythm between the three back-to-back showcase sections */
+.section-showcase + .section-showcase { margin-top: 3.5rem; }
 
 /* quant table subsection headings */
 .quant-sub {
