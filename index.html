@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DFD — Data-Forcing Distillation: Restoring Diversity and Fidelity in Few-Step Video Generation</title>
+  <meta name="description" content="Data-Forcing Distillation (DFD) is a simple post-training framework that restores diversity and fidelity in DMD-distilled few-step video diffusion models with a single line of code change. Validated on Wan2.1-1.3B (text-to-video) and Cosmos-Predict2.5-2B (image-to-video), plus autoregressive generation under Self Forcing.">
+
+  <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="DFD — Data-Forcing Distillation">
+  <meta property="og:description" content="Restoring diversity and fidelity in few-step video generation with a single line of code change.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,700;6..72,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1 class="title">
+      <span class="title-name">DFD</span><span class="title-colon">:</span>
+      <span class="title-expand">
+        Data-Forcing Distillation &mdash; Restoring Diversity and Fidelity in Few-Step Video Generation
+      </span>
+    </h1>
+    <div class="hero-authors">
+      <div class="author-row">
+        <span class="author-name">Siyi Chen<sup>1</sup></span>
+        <span class="author-name">Shaowei Liu<sup>2,3</sup></span>
+        <span class="author-name">Yixuan Jia<sup>1</sup></span>
+        <span class="author-name">Zian Wang<sup>2</sup></span>
+        <span class="author-name">Huan Ling<sup>2</sup></span>
+        <span class="author-name">Qing Qu<sup>1</sup></span>
+        <span class="author-name">Jun Gao<sup>1,2</sup></span>
+      </div>
+      <div class="author-affil">
+        <sup>1</sup>University of Michigan
+        &nbsp;&middot;&nbsp;
+        <sup>2</sup>NVIDIA
+        &nbsp;&middot;&nbsp;
+        <sup>3</sup>University of Illinois Urbana-Champaign
+      </div>
+    </div>
+    <nav class="link-row">
+      <a class="btn" href="#" rel="noopener">
+        <img class="btn-logo" src="static/images/icons/arxiv.svg" alt="">Paper
+      </a>
+      <a class="btn" href="https://github.com/csy2077/data-forcing-distillation" target="_blank" rel="noopener">
+        <img class="btn-logo" src="static/images/icons/github.svg" alt="">Code
+      </a>
+    </nav>
+    <div class="teaser-pills">
+      <div class="teaser-pill">
+        <div class="teaser-pill-stat">One line of code</div>
+        <div class="teaser-pill-body">DFD is a single-line change to the DMD2 training loop &mdash; no GAN needed.</div>
+      </div>
+      <div class="teaser-pill">
+        <div class="teaser-pill-stat">100&ndash;300 steps</div>
+        <div class="teaser-pill-body">A short post-training stage restores diversity and fidelity.</div>
+      </div>
+      <div class="teaser-pill">
+        <div class="teaser-pill-stat">3 generation tasks</div>
+        <div class="teaser-pill-body">Text-to-video (Wan2.1), image-to-video (Cosmos), and autoregressive generation (Self&nbsp;Forcing).</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="toc-nav" aria-label="Sections">
+    <div class="toc-inner">
+      <a href="#showcase">Results</a>
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#quant">Quantitative</a>
+      <a href="#limitation">Limitation</a>
+      <a href="#bibtex">BibTeX</a>
+    </div>
+  </nav>
+
+  <section id="showcase" class="section"><h2>Qualitative Results</h2><div id="showcase-root"></div></section>
+  <section id="abstract" class="section"><h2>Abstract</h2><div id="abstract-root"></div></section>
+  <section id="method" class="section"><h2>Method</h2><div id="method-root"></div></section>
+  <section id="quant" class="section"><h2>Quantitative Results</h2><div id="quant-root"></div></section>
+  <section id="limitation" class="section"><h2>Limitation</h2><div id="limitation-root"></div></section>
+  <section id="bibtex" class="section"><h2>BibTeX</h2>
+    <pre id="bibtex-content">@misc{dfd2026,
+  title  = {Data-Forcing Distillation: Restoring Diversity and Fidelity
+            in Few-Step Video Generation},
+  author = {Chen, Siyi and Liu, Shaowei and Jia, Yixuan and Wang, Zian
+            and Ling, Huan and Qu, Qing and Gao, Jun},
+  year   = {2026}
+}</pre>
+    <button id="copy-bibtex" class="btn btn-ghost">Copy BibTeX</button>
+  </section>
+
+  <footer class="page-footer">
+    <p class="footer-meta">
+      Project page for <strong>Data-Forcing Distillation</strong> &middot;
+      Last updated <time datetime="2026-06-11">June&nbsp;11, 2026</time>
+    </p>
+    <p class="footer-meta footer-sub">
+      Built with vanilla HTML / CSS / ES modules.
+    </p>
+  </footer>
+
+  <script type="module" src="static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+{
+ "tasks": [
+  {
+   "id": "i2v",
+   "label": "Image-to-Video",
+   "baseline": "DMD2",
+   "note": "Conditioned on an input image (Cosmos-Predict2.5-2B teacher).",
+   "cases": [
+    {
+     "id": "cars_highway",
+     "title": "Cars on highway",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_cars_highway.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/cars_highway_teacher.mp4",
+      "dfd": "static/videos/i2v/cars_highway_dfd.mp4",
+      "dmd": "static/videos/i2v/cars_highway_dmd.mp4"
+     }
+    },
+    {
+     "id": "man_sombrero",
+     "title": "Man with sombrero",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_man_sombrero.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/man_sombrero_teacher.mp4",
+      "dfd": "static/videos/i2v/man_sombrero_dfd.mp4",
+      "dmd": "static/videos/i2v/man_sombrero_dmd.mp4"
+     }
+    },
+    {
+     "id": "blue_train",
+     "title": "Blue train",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_blue_train.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/blue_train_teacher.mp4",
+      "dfd": "static/videos/i2v/blue_train_dfd.mp4",
+      "dmd": "static/videos/i2v/blue_train_dmd.mp4"
+     }
+    },
+    {
+     "id": "horses_dirt",
+     "title": "Horses on dirt road",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_horses_dirt.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/horses_dirt_teacher.mp4",
+      "dfd": "static/videos/i2v/horses_dirt_dfd.mp4",
+      "dmd": "static/videos/i2v/horses_dirt_dmd.mp4"
+     }
+    },
+    {
+     "id": "giraffe_field",
+     "title": "Giraffe in field",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_giraffe_field.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/giraffe_field_teacher.mp4",
+      "dfd": "static/videos/i2v/giraffe_field_dfd.mp4",
+      "dmd": "static/videos/i2v/giraffe_field_dmd.mp4"
+     }
+    },
+    {
+     "id": "fish_coral",
+     "title": "Fish & coral",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_fish_coral.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/fish_coral_teacher.mp4",
+      "dfd": "static/videos/i2v/fish_coral_dfd.mp4",
+      "dmd": "static/videos/i2v/fish_coral_dmd.mp4"
+     }
+    },
+    {
+     "id": "motorcyclists_dirt",
+     "title": "Motorcyclists",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_motorcyclists_dirt.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/motorcyclists_dirt_teacher.mp4",
+      "dfd": "static/videos/i2v/motorcyclists_dirt_dfd.mp4",
+      "dmd": "static/videos/i2v/motorcyclists_dirt_dmd.mp4"
+     }
+    },
+    {
+     "id": "kettle_campfire",
+     "title": "Kettle on campfire",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_kettle_campfire.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/kettle_campfire_teacher.mp4",
+      "dfd": "static/videos/i2v/kettle_campfire_dfd.mp4",
+      "dmd": "static/videos/i2v/kettle_campfire_dmd.mp4"
+     }
+    },
+    {
+     "id": "birds_sky",
+     "title": "Birds in sky",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_birds_sky.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/birds_sky_teacher.mp4",
+      "dfd": "static/videos/i2v/birds_sky_dfd.mp4",
+      "dmd": "static/videos/i2v/birds_sky_dmd.mp4"
+     }
+    },
+    {
+     "id": "couple_umbrella",
+     "title": "Couple with umbrella",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_couple_umbrella.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/couple_umbrella_teacher.mp4",
+      "dfd": "static/videos/i2v/couple_umbrella_dfd.mp4",
+      "dmd": "static/videos/i2v/couple_umbrella_dmd.mp4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "ar",
+   "label": "Autoregressive Video Generation",
+   "baseline": "DMD",
+   "note": "DFD applied under the Self Forcing framework.",
+   "cases": [
+    {
+     "id": "octopus",
+     "title": "Octopus & crab",
+     "prompt": "A wide-angle underwater photograph captures a large orange octopus resting on the ocean floor, its tentacles spread out around its body and eyes closed. The octopus blends seamlessly with the sandy and rocky terrain. Behind a rock, a brown and spiny king crab is crawling towards it, its claws raised and ready to strike. The crab has long legs and antennae, adding to its menacing appearance. The scene is set in a clear, blue ocean with rays of sunlight filtering through, creating a vivid contrast. The photo is sharp and crisp, with a high dynamic range, emphasizing the octopus and the crab in focus while the background is slightly blurred, enhancing the sense of depth.",
+     "thumb": "static/images/thumbs/ar_octopus.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/octopus_teacher.mp4",
+      "dfd": "static/videos/ar/octopus_dfd.mp4",
+      "dmd": "static/videos/ar/octopus_dmd.mp4"
+     }
+    },
+    {
+     "id": "steam_train",
+     "title": "Steam train",
+     "prompt": "A scenic photograph capturing the moment a steam train departs from the Glenfinnan Viaduct, a historic railway bridge in Scotland. The train moves gracefully over the arch-covered viaduct, its smoke billowing into the air. The landscape is lush with greenery, and towering rocky mountains frame the scene, creating a picturesque backdrop. The sky is a clear, bright blue with the sun shining down, casting a warm glow on the train and the surrounding scenery. The viaduct itself is a striking feature, with intricate ironwork and a verdant setting. The photo has a classic, nostalgic feel, emphasizing the natural beauty and historical charm of the location. A wide-angle shot from a slightly elevated angle, capturing both the train and the expansive landscape.",
+     "thumb": "static/images/thumbs/ar_steam_train.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/steam_train_teacher.mp4",
+      "dfd": "static/videos/ar/steam_train_dfd.mp4",
+      "dmd": "static/videos/ar/steam_train_dmd.mp4"
+     }
+    },
+    {
+     "id": "woman_portrait",
+     "title": "Woman portrait",
+     "prompt": "A close-up portrait of a woman, her face illuminated by the side lighting, capturing her delicate features and expressive eyes. As the camera slowly pulls back, it reveals her sitting gracefully in a cozy armchair, her hair falling softly over her shoulders. She wears a elegant evening gown in a deep shade of blue, adorned with intricate lace and sparkling jewels. The background features a warm, candlelit room with soft shadows and a faint hint of a fireplace. The photo has a romantic and timeless quality, reminiscent of a classic Hollywood portrait. A medium shot transitioning to a wider view.",
+     "thumb": "static/images/thumbs/ar_woman_portrait.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/woman_portrait_teacher.mp4",
+      "dfd": "static/videos/ar/woman_portrait_dfd.mp4",
+      "dmd": "static/videos/ar/woman_portrait_dmd.mp4"
+     }
+    },
+    {
+     "id": "ostrich",
+     "title": "Ostrich in kitchen",
+     "prompt": "A slow cinematic push-in on an ostrich standing in a 1980s kitchen, the camera gradually zooming in to reveal the bird's curious expression. The kitchen is adorned with vintage appliances and Formica countertops, with a muted color palette of pastel greens and yellows. The ostrich, with its distinctive long neck and feathered plumage, stands confidently, one foot slightly raised. Its large brown eyes peer curiously at the viewer, as if pondering the strange surroundings. The background features blurred details of old newspapers scattered on the floor and a faded floral wallpaper. The lighting is warm and soft, casting gentle shadows. A close-up shot from a slightly lower angle.",
+     "thumb": "static/images/thumbs/ar_ostrich.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/ostrich_teacher.mp4",
+      "dfd": "static/videos/ar/ostrich_dfd.mp4",
+      "dmd": "static/videos/ar/ostrich_dmd.mp4"
+     }
+    },
+    {
+     "id": "gundam",
+     "title": "Gundam city",
+     "prompt": "A cinematic CGI scene where towering skyscrapers in Hong Kong suddenly transform into a moving Gundam robot. The robot stands tall and imposing, with intricate mechanical details visible in its design. The cityscape is blurred behind it, with buildings and streets becoming part of the robot's structure. The robot moves with fluid, dynamic movements, its limbs extending and contracting as it walks through the bustling metropolis. The background shows a mix of bright lights and shadows, creating a sense of movement and action. The camera follows the robot from a low-angle shot, capturing its imposing presence and the transformation of the city into its mechanical form.",
+     "thumb": "static/images/thumbs/ar_gundam.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/gundam_teacher.mp4",
+      "dfd": "static/videos/ar/gundam_dfd.mp4",
+      "dmd": "static/videos/ar/gundam_dmd.mp4"
+     }
+    },
+    {
+     "id": "sparkling_water",
+     "title": "Sparkling water",
+     "prompt": "A close-up shot of sparkling water being poured into a glass, capturing the detailed flow and bubbles as they rise and burst on the surface. The glass is clear and tall, with a slender stem. The water flows smoothly, creating ripples and tiny bubbles that dance and scatter across the liquid's surface. The background is blurred, showcasing a soft, warm ambient light that highlights the vibrant play of light and shadow on the water. The scene has a crisp, high-definition texture, emphasizing the dynamic movement of the water.",
+     "thumb": "static/images/thumbs/ar_sparkling_water.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/sparkling_water_teacher.mp4",
+      "dfd": "static/videos/ar/sparkling_water_dfd.mp4",
+      "dmd": "static/videos/ar/sparkling_water_dmd.mp4"
+     }
+    },
+    {
+     "id": "drink_ice",
+     "title": "Drink over ice",
+     "prompt": "A close-up shot of a drink being poured over ice, showcasing the detailed flow of liquid interacting with the ice cubes. The drink cascades down, creating ripples and splashes on the surface of the ice, which glistens under the soft lighting. The glass holds a clear, amber-colored liquid, and the ice cubes sparkle with tiny droplets of condensation. The background is blurred, highlighting the dynamic interaction between the drink and the ice. The photo has a crisp, natural lighting style, emphasizing the fluid motion and the sparkling ice. A close-up from a slightly downward angle.",
+     "thumb": "static/images/thumbs/ar_drink_ice.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/drink_ice_teacher.mp4",
+      "dfd": "static/videos/ar/drink_ice_dfd.mp4",
+      "dmd": "static/videos/ar/drink_ice_dmd.mp4"
+     }
+    },
+    {
+     "id": "magical_forest",
+     "title": "Magical forest",
+     "prompt": "A magical forest scene in a fairy tale style, where trees with human-like faces whisper to each other. The forest is dense and enchanted, with trees having expressive faces, some smiling and others frowning. The leaves rustle softly as if they are speaking in hushed tones. The sunlight filters through the canopy, casting dappled shadows on the forest floor. A small stream flows nearby, its surface shimmering with magical light. The camera angle is slightly elevated, capturing the interaction between two whispering trees in the foreground, with the rest of the forest stretching into the distance.",
+     "thumb": "static/images/thumbs/ar_magical_forest.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/magical_forest_teacher.mp4",
+      "dfd": "static/videos/ar/magical_forest_dfd.mp4",
+      "dmd": "static/videos/ar/magical_forest_dmd.mp4"
+     }
+    },
+    {
+     "id": "yoga",
+     "title": "Yoga in park",
+     "prompt": "A serene yoga practice scene in a tranquil park, capturing a graceful woman moving fluidly through various poses. She focuses intently on maintaining balance and enhancing flexibility, her body flowing effortlessly with each movement. The woman has long flowing hair tied back, and wears a simple white yoga outfit. Her expression is one of concentration and inner peace. The park background features lush greenery, blooming flowers, and a gently flowing stream in the distance, creating a calming atmosphere. The photo is taken from a low angle, emphasizing her graceful form and the natural beauty of the setting. A medium shot with dynamic movement.",
+     "thumb": "static/images/thumbs/ar_yoga.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/yoga_teacher.mp4",
+      "dfd": "static/videos/ar/yoga_dfd.mp4",
+      "dmd": "static/videos/ar/yoga_dmd.mp4"
+     }
+    },
+    {
+     "id": "butterfly",
+     "title": "Butterfly wings",
+     "prompt": "A close-up shot of a butterfly's wings, capturing the intricate patterns and vibrant colors in exquisite detail. The wings are delicately folded, showcasing a mesmerizing array of iridescent blues, greens, and oranges. Fine veins run through the wings, adding texture and depth. The background is blurred, highlighting the wings' stunning beauty. The photo has a soft, natural lighting effect, emphasizing the delicate nature of the butterfly. A close-up shot from a slightly elevated angle.",
+     "thumb": "static/images/thumbs/ar_butterfly.jpg",
+     "videos": {
+      "teacher": "static/videos/ar/butterfly_teacher.mp4",
+      "dfd": "static/videos/ar/butterfly_dfd.mp4",
+      "dmd": "static/videos/ar/butterfly_dmd.mp4"
+     }
+    }
+   ]
+  },
+  {
+   "id": "t2v",
+   "label": "Text-to-Video",
+   "baseline": "DMD2",
+   "note": "Wan2.1-1.3B teacher, four-step student.",
+   "cases": [
+    {
+     "id": "anim_fox",
+     "title": "Fox in snow",
+     "prompt": "Animation of a graceful fox running through a snowy landscape.",
+     "thumb": "static/images/thumbs/t2v_anim_fox.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/anim_fox_teacher.mp4",
+      "dfd": "static/videos/t2v/anim_fox_dfd.mp4",
+      "dmd": "static/videos/t2v/anim_fox_dmd.mp4"
+     }
+    },
+    {
+     "id": "anim_village",
+     "title": "Japanese village",
+     "prompt": "Animated traditional Japanese village at sunset with glowing paper lanterns and falling cherry blossoms.",
+     "thumb": "static/images/thumbs/t2v_anim_village.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/anim_village_teacher.mp4",
+      "dfd": "static/videos/t2v/anim_village_dfd.mp4",
+      "dmd": "static/videos/t2v/anim_village_dmd.mp4"
+     }
+    },
+    {
+     "id": "anim_palace",
+     "title": "Underwater palace",
+     "prompt": "Cartoon-style elaborate underwater palace made of shells and coral.",
+     "thumb": "static/images/thumbs/t2v_anim_palace.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/anim_palace_teacher.mp4",
+      "dfd": "static/videos/t2v/anim_palace_dfd.mp4",
+      "dmd": "static/videos/t2v/anim_palace_dmd.mp4"
+     }
+    },
+    {
+     "id": "anim_spaceship",
+     "title": "Spaceship landing",
+     "prompt": "Animated futuristic spaceship smoothly landing on a alien planet with purple vegetation.",
+     "thumb": "static/images/thumbs/t2v_anim_spaceship.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/anim_spaceship_teacher.mp4",
+      "dfd": "static/videos/t2v/anim_spaceship_dfd.mp4",
+      "dmd": "static/videos/t2v/anim_spaceship_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_umbrella",
+     "title": "Yellow umbrella",
+     "prompt": "A young woman with curly red hair laughs while spinning a yellow umbrella in slow motion as rain falls around her on a cobblestone street.",
+     "thumb": "static/images/thumbs/t2v_vipe_umbrella.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/vipe_umbrella_teacher.mp4",
+      "dfd": "static/videos/t2v/vipe_umbrella_dfd.mp4",
+      "dmd": "static/videos/t2v/vipe_umbrella_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_saltflat",
+     "title": "Salt flat",
+     "prompt": "Cinematic shot of a lone figure in a long coat walking across an endless salt flat under a vast purple twilight sky.",
+     "thumb": "static/images/thumbs/t2v_vipe_saltflat.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/vipe_saltflat_teacher.mp4",
+      "dfd": "static/videos/t2v/vipe_saltflat_dfd.mp4",
+      "dmd": "static/videos/t2v/vipe_saltflat_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_coast",
+     "title": "Turquoise coast",
+     "prompt": "Drone footage soaring above a turquoise coastline where waves crash against jagged white cliffs.",
+     "thumb": "static/images/thumbs/t2v_vipe_coast.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/vipe_coast_teacher.mp4",
+      "dfd": "static/videos/t2v/vipe_coast_dfd.mp4",
+      "dmd": "static/videos/t2v/vipe_coast_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_turtle",
+     "title": "Sea turtle",
+     "prompt": "Underwater shot of a sea turtle gliding gracefully through shafts of sunlight piercing a coral reef.",
+     "thumb": "static/images/thumbs/t2v_vipe_turtle.jpg",
+     "videos": {
+      "teacher": "static/videos/t2v/vipe_turtle_teacher.mp4",
+      "dfd": "static/videos/t2v/vipe_turtle_dfd.mp4",
+      "dmd": "static/videos/t2v/vipe_turtle_dmd.mp4"
+     }
+    }
+   ]
+  }
+ ]
+}
