@@ -115,6 +115,127 @@
       "dfd": "static/videos/i2v/couple_umbrella_dfd.mp4",
       "dmd": "static/videos/i2v/couple_umbrella_dmd.mp4"
      }
+    },
+    {
+     "id": "vipe_00",
+     "title": "Red sports car",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_00.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_00_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_00_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_00_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_04",
+     "title": "Family gathering",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_04.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_04_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_04_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_04_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_06",
+     "title": "Women by the bridge",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_06.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_06_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_06_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_06_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_07",
+     "title": "Robot at night",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_07.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_07_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_07_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_07_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_09",
+     "title": "Girl portrait",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_09.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_09_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_09_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_09_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_15",
+     "title": "Alpine village",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_15.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_15_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_15_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_15_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_21",
+     "title": "Smoking goblet",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_21.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_21_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_21_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_21_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_27",
+     "title": "Wildebeest crossing",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_27.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_27_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_27_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_27_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_36",
+     "title": "Cowboys on horses",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_36.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_36_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_36_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_36_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_43",
+     "title": "Honor guard",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_43.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_43_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_43_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_43_dmd.mp4"
+     }
+    },
+    {
+     "id": "vipe_54",
+     "title": "Graveyard at night",
+     "prompt": null,
+     "thumb": "static/images/thumbs/i2v_vipe_54.jpg",
+     "videos": {
+      "teacher": "static/videos/i2v/vipe_54_teacher.mp4",
+      "dfd": "static/videos/i2v/vipe_54_dfd.mp4",
+      "dmd": "static/videos/i2v/vipe_54_dmd.mp4"
+     }
     }
    ]
   },
