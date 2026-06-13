@@ -1,5 +1,6 @@
 import { makeTaskShowcase } from './showcase.js';
 import { mountAbstract, mountMethod, mountQuant, mountLimitation } from './static_sections.js';
+import { mountAblations } from './ablations_section.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const map = {
@@ -8,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "results-t2v-root": makeTaskShowcase("t2v"),
     "abstract-root":    mountAbstract,
     "method-root":      mountMethod,
+    "ablations-root":   mountAblations,
     "quant-root":       mountQuant,
     "limitation-root":  mountLimitation,
   };
