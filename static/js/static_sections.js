@@ -13,8 +13,8 @@ a simple post-training framework that restores diversity and fidelity in DMD
 discrepancy</em> that guides the student toward the real-data distribution, pulling it
 to missing modes (mitigating mode collapse) and away from problematic modes absent in
 real data (avoiding over-saturation). We provide an in-depth theoretical analysis of
-our framework and validate our approach on both text-to-video and image-to-video
-generation. With <em>only 100&ndash;300 steps</em> of finetuning, DFD effectively
+our framework and validate our approach on text-to-video, image-to-video, and
+autoregressive video generation. With <em>only 100&ndash;300 steps</em> of finetuning, DFD effectively
 restores diversity and fidelity on both Wan2.1-1.3B and Cosmos-Predict2.5-2B models,
 resolving the over-saturation artifacts with significantly better video dynamics and
 appearance, and even outperforms the teacher model.`;
