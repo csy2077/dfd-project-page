@@ -6,91 +6,46 @@
 
 const V = (src) => `static/videos/ablations/${src}`;
 
+// Each block renders like the Limitation figure: a row of videos + a caption.
+// `videos` is a single row; the caption spells out which column is which.
 const BLOCKS = [
   {
     id: "ab-mix",
     title: "Gradient Mixing Weight",
-    desc: `DFD forms its practical update as a mixture of the DFD and DMD gradients
-      with weight <span class="math">w</span>. We compare <strong>w&nbsp;=&nbsp;&frac12;</strong>
-      (our default, a DFD&nbsp;+&nbsp;DMD mixture) against <strong>w&nbsp;=&nbsp;1</strong>
-      (pure DFD). The two settings look nearly identical, showing the method is stable
-      and insensitive to the choice of <span class="math">w</span>.`,
-    cols: ["w = 1/2 &nbsp;(DFD + DMD mixture, Ours)", "w = 1 &nbsp;(pure DFD)"],
-    colClass: ["is-ours", ""],
-    rows: [
-      [V("mix_half_1.mp4"), V("mix_one_1.mp4")],
-      [V("mix_half_2.mp4"), V("mix_one_2.mp4")],
-    ],
+    videos: [V("mix_half_1.mp4"), V("mix_one_1.mp4")],
+    caption: `<strong>Gradient mixing weight.</strong> Left: <strong>w = ½</strong>
+      (our default, a DFD&nbsp;+&nbsp;DMD mixture). Right: <strong>w = 1</strong>
+      (pure DFD). The two settings look nearly identical, showing DFD is stable and
+      insensitive to the choice of w.`,
   },
   {
     id: "ab-gan",
     title: "Effect of the GAN Loss",
-    desc: `DMD2 relies on an auxiliary GAN loss for implicit real-data supervision.
-      Because DFD supervises with real data <em>explicitly</em>, the GAN can be dropped:
-      removing it simplifies the pipeline and even improves dynamic degree and imaging
-      quality, while keeping the other metrics comparable.`,
-    cols: ["With GAN loss", "Without GAN loss (Ours)"],
-    colClass: ["", "is-ours"],
-    rows: [
-      [V("gan_with.mp4"), V("gan_without.mp4")],
-    ],
+    videos: [V("gan_with.mp4"), V("gan_without.mp4")],
+    caption: `<strong>Effect of the GAN loss.</strong> Left: with GAN loss. Right:
+      without GAN loss (ours). Because DFD supervises with real data explicitly, the
+      GAN can be dropped &mdash; this even improves dynamic degree and imaging quality
+      while keeping the other metrics comparable.`,
   },
   {
     id: "ab-scratch",
     title: "Distilling from Scratch (No DMD2 Pretraining)",
-    desc: `DFD requires the <em>validity condition</em> to hold for stable training,
-      which a DMD2-pretrained student satisfies. Initializing directly from the teacher
-      instead &mdash; distilling from scratch &mdash; violates this condition: even after
-      a long run (e.g.&nbsp;1400 iterations) the model fails to converge, on both
-      text-to-video and image-to-video tasks.`,
-    cols: ["From scratch — sample 1", "From scratch — sample 2"],
-    rowLabels: ["Text-to-Video", "Image-to-Video"],
-    rows: [
-      [V("scratch_t2v_1.mp4"), V("scratch_t2v_2.mp4")],
-      [V("scratch_i2v_1.mp4"), V("scratch_i2v_2.mp4")],
-    ],
+    videos: [V("scratch_t2v_1.mp4"), V("scratch_i2v_1.mp4")],
+    caption: `<strong>Distilling from scratch.</strong> Left: text-to-video. Right:
+      image-to-video. Initializing directly from the teacher violates the validity
+      condition: even after a long run (e.g.&nbsp;1400 iterations) the model fails to
+      converge.`,
   },
   {
     id: "ab-scale",
     title: "Scaling Up with Large Batch Size",
-    desc: `Scaling the image-to-video batch size from <strong>16</strong> to
-      <strong>128</strong> consistently improves results &mdash; notably better temporal
-      stability during large motions and improved physical plausibility (e.g.&nbsp;object
-      permanence).`,
-    cols: ["Batch size 16", "Batch size 128"],
-    colClass: ["", "is-ours"],
-    rows: [
-      [V("scale_bs16_1.mp4"), V("scale_bs128_1.mp4")],
-      [V("scale_bs16_2.mp4"), V("scale_bs128_2.mp4")],
-    ],
+    videos: [V("scale_bs16_1.mp4"), V("scale_bs128_1.mp4")],
+    caption: `<strong>Scaling up the batch size.</strong> Left: batch size 16. Right:
+      batch size 128. The larger batch consistently improves results &mdash; notably
+      better temporal stability during large motions and improved physical plausibility
+      (e.g.&nbsp;object permanence).`,
   },
 ];
-
-function gridHtml(block) {
-  const ncol = block.cols.length;
-  const hasRowLabels = !!block.rowLabels;
-  const colClass = block.colClass || block.cols.map(() => "");
-
-  const header =
-    (hasRowLabels ? `<div class="ab-rowlabel-spacer"></div>` : "") +
-    block.cols.map((c, i) =>
-      `<div class="ab-col-head ${colClass[i]}">${c}</div>`).join("");
-
-  const rows = block.rows.map((row, r) => {
-    const label = hasRowLabels
-      ? `<div class="ab-row-label">${block.rowLabels[r]}</div>` : "";
-    const cells = row.map(src =>
-      `<div class="ab-cell"><video src="${src}" muted loop playsinline preload="none"></video></div>`
-    ).join("");
-    return label + cells;
-  }).join("");
-
-  const cols = (hasRowLabels ? "auto " : "") + `repeat(${ncol}, 1fr)`;
-  return `
-    <div class="ab-grid" style="grid-template-columns: ${cols};">
-      ${header}${rows}
-    </div>`;
-}
 
 export function mountAblations(root) {
   root.innerHTML = `
@@ -101,8 +56,13 @@ export function mountAblations(root) {
     ${BLOCKS.map(b => `
       <div class="ab-block" id="${b.id}">
         <h3 class="ab-title">${b.title}</h3>
-        <p class="ab-desc">${b.desc}</p>
-        ${gridHtml(b)}
+        <figure>
+          <div class="limit-grid">
+            ${b.videos.map(src =>
+              `<video src="${src}" muted loop playsinline preload="none"></video>`).join("")}
+          </div>
+          <figcaption class="caption">${b.caption}</figcaption>
+        </figure>
       </div>
     `).join("")}
   `;
@@ -121,7 +81,7 @@ export function mountAblations(root) {
         });
       });
     }, { threshold: 0.1 });
-    root.querySelectorAll(".ab-grid").forEach(g => io.observe(g));
+    root.querySelectorAll(".limit-grid").forEach(g => io.observe(g));
   } else {
     root.querySelectorAll("video").forEach(v => { const p = v.play(); if (p) p.catch(() => {}); });
   }
