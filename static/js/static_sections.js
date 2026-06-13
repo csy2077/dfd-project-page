@@ -50,46 +50,57 @@ gradients with probability <span class="math">p</span>, which reduces to a
 <strong>single line of code change</strong> in the DMD2 training loop (highlighted
 below).`;
 
-// Algorithm 1 — Pseudocode of Student Update Step in a PyTorch-like style.
-// The {hl} line is the only difference between the DFD and DMD frameworks.
-const ALGO_LINES = [
-  "# student_network / teacher_network / fake_score_network: networks",
-  "# input_student, t_student: noisy input and timestep fed to student",
-  "# t, eps: diffusion timestep and noise for forward diffusion",
-  "# data: real data batch; condition: video gen conditioning",
-  "# p: probability of using DFD vs DMD",
-  "def student_update_step(input_student, t_student, t, eps, data, condition=None):",
-  "    # Generate samples using student network.",
-  "    gen_data = student_network(input_student, t_student, condition=condition)",
-  "",
-  "    # teacher_data = gen_data.detach() # Original DMD update",
-  { hl: "    teacher_data = data.detach() if (torch.rand() < p) else gen_data.detach()" },
-  "",
-  "    # Inject noise into the data via forward diffusion",
-  "    perturbed_data         = forward_diffusion(gen_data, eps, t)",
-  "    perturbed_teacher_data = forward_diffusion(teacher_data, eps, t)",
-  "    # Estimate scores",
-  "    fake_score    = fake_score_network(perturbed_data, t, condition=condition)",
-  "    teacher_score = teacher_network(perturbed_teacher_data, t, condition=condition)",
-  "    # Compute gradient and student loss",
-  "    vsd_grad      = fake_score - teacher_score",
-  "    pseudo_target = gen_data - vsd_grad",
-  "    gen_loss      = 0.5 * F.mse_loss(gen_data, pseudo_target.detach())",
-  "    return gen_loss",
-];
-
+// Algorithm 1 — Student update step, Jupyter-notebook style.
+// Condensed to the essential lines; the {hl} line is the only DFD vs DMD difference.
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+// Lightweight Python-ish syntax highlighter for the notebook cell.
+function pyHighlight(line) {
+  // whole-line comment
+  const cm = line.match(/^(\s*)(#.*)$/);
+  if (cm) return `${cm[1]}<span class="tok-com">${esc(cm[2])}</span>`;
+
+  // split off a trailing inline comment (not inside quotes — safe for our snippet)
+  let code = line, trail = "";
+  const hash = line.indexOf("#");
+  if (hash >= 0) { code = line.slice(0, hash); trail = line.slice(hash); }
+
+  let h = esc(code);
+  h = h.replace(/\b(def|if|else|return|for|in|None|True|False)\b/g, '<span class="tok-kw">$1</span>');
+  h = h.replace(/\b(student_network|teacher_network|fake_score_network|forward_diffusion|detach|rand|mse_loss)\b/g,
+                '<span class="tok-fn">$1</span>');
+  h = h.replace(/\b(\d+\.?\d*)\b/g, '<span class="tok-num">$1</span>');
+  if (trail) h += `<span class="tok-com">${esc(trail)}</span>`;
+  return h;
+}
+
+const ALGO_LINES = [
+  "def student_update_step(z, t, eps, data, cond, p):",
+  "    gen = student_network(z, t, cond)                  # student sample",
+  "    # teacher_in = gen.detach()                        # original DMD",
+  { hl: "    teacher_in = data.detach() if torch.rand() < p else gen.detach()" },
+  "    fake  = fake_score_network(forward_diffusion(gen, eps, t), t, cond)",
+  "    real  = teacher_network(forward_diffusion(teacher_in, eps, t), t, cond)",
+  "    target = gen - (fake - real)                       # DMD/DFD gradient",
+  "    return 0.5 * F.mse_loss(gen, target.detach())",
+];
+
 function algoHtml() {
-  const lines = ALGO_LINES.map(l =>
-    typeof l === "string"
-      ? `<span class="code-line">${esc(l) || " "}</span>`
-      : `<span class="code-line code-hl">${esc(l.hl)}</span>`
-  ).join("\n");
+  const lines = ALGO_LINES.map(l => {
+    if (typeof l === "string")
+      return `<span class="nb-line">${pyHighlight(l) || "&nbsp;"}</span>`;
+    return `<span class="nb-line nb-hl">${pyHighlight(l.hl)}</span>`;
+  }).join("\n");
   return `
-    <figure class="algo-box">
-      <div class="algo-title">Algorithm 1&ensp;Pseudocode of Student Update Step in a PyTorch-like Style.</div>
-      <pre class="method-code"><code>${lines}</code></pre>
+    <figure class="nb-cell">
+      <div class="nb-head">
+        <span class="nb-dots"><i></i><i></i><i></i></span>
+        <span class="nb-title">student_update_step.py</span>
+      </div>
+      <div class="nb-body">
+        <span class="nb-prompt">In&nbsp;[1]:</span>
+        <pre class="nb-code"><code>${lines}</code></pre>
+      </div>
       <figcaption class="algo-note">
         The <span class="hl-word">highlighted</span> line is the <em>only</em>
         difference between the DFD and DMD frameworks.
@@ -300,8 +311,10 @@ export function mountLimitation(root) {
   root.innerHTML = `
     <p>${LIMITATION_TEXT}</p>
     <figure>
-      <img src="static/images/limitation.jpg" alt="Failure cases under a two-step generation budget"
-           style="width: 100%; max-width: 1100px; display: block; margin: 0 auto;" loading="lazy">
+      <div class="limit-grid">
+        <video src="static/videos/limitation/limit_1.mp4" muted loop playsinline preload="none"></video>
+        <video src="static/videos/limitation/limit_2.mp4" muted loop playsinline preload="none"></video>
+      </div>
       <figcaption class="caption">
         <strong>Limitation of DFD under a two-step generation budget.</strong>
         With two-step distillation of the Cosmos-Predict2.5-2B model, DFD still produces
@@ -310,4 +323,16 @@ export function mountLimitation(root) {
       </figcaption>
     </figure>
   `;
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => e.target.querySelectorAll("video").forEach(v => {
+        if (e.isIntersecting) { const p = v.play(); if (p) p.catch(() => {}); }
+        else v.pause();
+      }));
+    }, { threshold: 0.1 });
+    io.observe(root.querySelector(".limit-grid"));
+  } else {
+    root.querySelectorAll("video").forEach(v => { const p = v.play(); if (p) p.catch(() => {}); });
+  }
 }

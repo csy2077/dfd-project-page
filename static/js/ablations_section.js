@@ -15,7 +15,8 @@ const BLOCKS = [
       (our default, a DFD&nbsp;+&nbsp;DMD mixture) against <strong>w&nbsp;=&nbsp;1</strong>
       (pure DFD). The two settings look nearly identical, showing the method is stable
       and insensitive to the choice of <span class="math">w</span>.`,
-    cols: ["w = 1/2 &nbsp;(DFD + DMD mixture)", "w = 1 &nbsp;(pure DFD)"],
+    cols: ["w = 1/2 &nbsp;(DFD + DMD mixture, Ours)", "w = 1 &nbsp;(pure DFD)"],
+    colClass: ["is-ours", ""],
     rows: [
       [V("mix_half_1.mp4"), V("mix_one_1.mp4")],
       [V("mix_half_2.mp4"), V("mix_one_2.mp4")],
