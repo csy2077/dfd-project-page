@@ -367,17 +367,6 @@
      }
     },
     {
-     "id": "castle_drone",
-     "title": "Castle drone shot",
-     "prompt": "An FPV drone shot capturing a majestic castle perched on a rocky cliff. The camera moves swiftly, revealing intricate stone walls, towering towers, and detailed gargoyles. The castle is partially shrouded in mist, adding a sense of mystery and grandeur. The cliff backdrop features jagged rocks and lush greenery, with patches of sunlight breaking through the clouds. The overall scene has a vivid and dynamic feel, with the camera angle emphasizing the height and imposing presence of the castle.",
-     "thumb": "static/images/thumbs/ar_castle_drone.jpg",
-     "videos": {
-      "teacher": "static/videos/ar/castle_drone_teacher.mp4",
-      "dfd": "static/videos/ar/castle_drone_dfd.mp4",
-      "dmd": "static/videos/ar/castle_drone_dmd.mp4"
-     }
-    },
-    {
      "id": "watercolor_cat",
      "title": "Watercolor cat",
      "prompt": "A whimsical illustration in a soft watercolor style of a curious cat peeking out from a cozy, woven basket hidden behind a pile of fluffy cushions. The cat has large, expressive green eyes and a fluffy white fur coat with a black tipped tail. It is perched on one paw, ears pricked up, and its whiskers twitch as it gazes intently at something just beyond the viewer's line of sight. The background features a warm, inviting living room with hints of sunlight filtering through a window, casting a gentle glow on the scene. The basket is intricately detailed with patterns and textures. A close-up shot from a slightly lower angle, capturing the cat's entire body and the subtle play of light on its fur.",
