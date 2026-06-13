@@ -1300,8 +1300,9 @@ video {
 .title-line { display: block; }
 .title-sub {
   font-weight: 500;
-  font-size: 0.82em;
-  margin-top: 0.3rem;
+  font-size: clamp(0.78rem, 1.95vw, 1.2rem);
+  white-space: nowrap;          /* keep the subtitle on a single line */
+  margin-top: 0.45rem;
   color: var(--fg);
 }
 .title-acc { color: var(--accent-red); font-weight: 800; }
