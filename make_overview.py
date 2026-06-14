@@ -233,6 +233,45 @@ class Loop:
             ok, fr = self.cap.read()
         return fr
 
+def grid_clip(writer, kick, paths, rows, cols, caption, secs=4.5,
+              highlight=False, kcol=CYAN):
+    """Show `paths` in a rows×cols grid for `secs`, with a kicker + caption."""
+    side, gap = 64, 16
+    top, bot = 132, 128
+    region_h = H - top - bot
+    panel_w = (W - 2 * side - (cols - 1) * gap) // cols
+    panel_h = int(panel_w * 9 / 16)
+    grid_h = rows * panel_h + (rows - 1) * gap
+    y_start = top + (region_h - grid_h) // 2
+
+    ov = bg_layer().convert("RGBA")
+    kicker(ov, kick, 80, kcol)
+    d = ImageDraw.Draw(ov, "RGBA")
+    coords = []
+    for idx in range(len(paths)):
+        rr, cc = idx // cols, idx % cols
+        x = side + cc * (panel_w + gap)
+        y = y_start + rr * (panel_h + gap)
+        coords.append((x, y))
+        col = CYAN if highlight else GRIDCOL
+        d.rectangle([x - 2, y - 2, x + panel_w + 2, y + panel_h + 2],
+                    outline=(*col, 255), width=2 if highlight else 1)
+    # caption
+    cap_lines = wrap(caption, font(27), W - 240)
+    glow_text(ov, cap_lines, [font(27)] * len(cap_lines),
+              [MUTED] * len(cap_lines), H - 64, glow=BLUE, glow_r=5, line_gap=10)
+    ov_bgr = to_bgr(ov)
+
+    loops = [Loop(p) for p in paths]
+    for _ in range(int(secs * FPS)):
+        f = ov_bgr.copy()
+        for (x, y), lp in zip(coords, loops):
+            fr = lp.frame()
+            if fr is None:
+                continue
+            f[y:y + panel_h, x:x + panel_w] = cv2.resize(fr, (panel_w, panel_h))
+        writer.write(f)
+
 def montage(writer, cases, secs_each=3.2):
     panel_w = (W - 4 * 18) // 3
     panel_h = int(panel_w * 9 / 16)
@@ -278,13 +317,30 @@ def main():
     vw = cv2.VideoWriter(OUT, cv2.VideoWriter_fourcc(*"avc1"), FPS, (W, H))
     assert vw.isOpened(), "H.264 (avc1) writer failed to open"
 
+    DMDP = os.path.join(HERE, "..", "dmd problem")
+    over = os.path.join(DMDP, "oversaturation")
+    div_dmd = os.path.join(DMDP, "limited diversity/dmd2")
+    div_dfd = os.path.join(DMDP, "limited diversity/dfd")
+    seeds = list(range(1, 9))
+
     title_card(vw)
-    text_card(vw, "THE PROBLEM",
-              "Distilling video diffusion with DMD collapses sample diversity and "
-              "over-saturates outputs — a side effect of the mode-seeking reverse-KL objective.")
-    text_card(vw, "OUR IDEA",
-              "DFD adds a teacher score discrepancy: it pulls the student toward modes it "
-              "missed and away from over-saturated outputs absent in real data.")
+
+    # ── The DMD2 problem, shown with videos instead of paragraphs ──
+    section_card(vw, "The Problem with DMD2")
+    grid_clip(vw, "PROBLEM 1 — OVER-SATURATION",
+              [f"{over}/student_step4_0004_seed4.mp4",
+               f"{over}/student_step4_0060_seed2.mp4"],
+              1, 2,
+              "DMD2 over-saturates: colors and contrast drift far from real video.",
+              secs=4.5)
+    grid_clip(vw, "PROBLEM 2 — LIMITED DIVERSITY",
+              [f"{div_dmd}/student_step4_0067_seed{s}.mp4" for s in seeds],
+              2, 4,
+              "Same prompt, 8 random seeds — DMD2 collapses to near-identical videos.",
+              secs=5.0)
+
+    # ── Our method ──
+    section_card(vw, "Our Method: Data-Forcing Distillation")
     equation_card(vw)
     code_card(vw)
 
@@ -307,6 +363,15 @@ def main():
         ("Turquoise coast", f"{t}/vipe_coast_teacher.mp4",  f"{t}/vipe_coast_dfd.mp4",  f"{t}/vipe_coast_dmd.mp4"),
         ("Sea turtle",      f"{t}/vipe_turtle_teacher.mp4", f"{t}/vipe_turtle_dfd.mp4", f"{t}/vipe_turtle_dmd.mp4"),
     ])
+
+    # ── DFD restores diversity (same prompt as the DMD2 collapse above) ──
+    section_card(vw, "DFD Restores Diversity")
+    grid_clip(vw, "DFD — SAME PROMPT, 8 SEEDS",
+              [f"{div_dfd}/student_step4_0067_seed{s}.mp4" for s in seeds],
+              2, 4,
+              "With DFD, the same prompt and 8 seeds yield clearly diverse videos.",
+              secs=5.5, highlight=True)
+
     outro(vw)
     vw.release()
     print("wrote", OUT, os.path.getsize(OUT) // 1024, "KB")
