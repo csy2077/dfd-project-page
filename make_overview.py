@@ -183,10 +183,13 @@ def equation_card(writer):
     x0, y0 = (W - new[0]) // 2, (H - new[1]) // 2 - 10
     pil.alpha_composite(glow, (x0, y0))
     pil.alpha_composite(eq_img, (x0, y0))
-    glow_text(pil, wrap("Evaluate the teacher score at a REAL sample x instead of the "
-                        "student's own output.", font(28), W - 300),
-              [font(28)] * 2, [MUTED] * 2, H - 120, glow=BLUE, glow_r=5)
-    bgr = to_bgr(pil); fade_in(writer, bgr); hold(writer, bgr, 5.0)
+    cap_lines = wrap("Evaluate the teacher score at a REAL sample x instead of the "
+                     "student's own output, so the student learns directly from real "
+                     "data to remove over-saturation and restore diversity.",
+                     font(28), W - 260)
+    glow_text(pil, cap_lines, [font(28)] * len(cap_lines),
+              [MUTED] * len(cap_lines), H - 110, glow=BLUE, glow_r=5, line_gap=10)
+    bgr = to_bgr(pil); fade_in(writer, bgr); hold(writer, bgr, 5.6)
 
 def code_card(writer):
     pil = bg_layer().convert("RGBA")
