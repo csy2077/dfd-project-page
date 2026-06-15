@@ -175,28 +175,14 @@ def equation_card(writer):
     pil = bg_layer().convert("RGBA")
     kicker(pil, "THE DFD METHOD", 90)
 
+    # The diagram is already tuned for a dark background — show it directly.
     img = Image.open(os.path.join(HERE, "static/images/dfd_method.png")).convert("RGBA")
-    # composite the (transparent) diagram onto white so its dark text is readable
-    white = Image.new("RGBA", img.size, (255, 255, 255, 255))
-    white.alpha_composite(img)
-    img = white
     iw, ih = img.size
-    avail_w, avail_h = W - 150, H - 230
+    avail_w, avail_h = W - 120, H - 210
     scale = min(avail_w / iw, avail_h / ih)
     img = img.resize((int(iw * scale), int(ih * scale)), Image.LANCZOS)
     iw, ih = img.size
-
-    pad = 18
-    px, py = (W - iw) // 2 - pad, (H - ih) // 2 - pad + 20
-    pw, ph = iw + 2 * pad, ih + 2 * pad
-    # cyan glow + white rounded panel
-    glow = Image.new("RGBA", pil.size, (0, 0, 0, 0))
-    ImageDraw.Draw(glow).rounded_rectangle([px, py, px + pw, py + ph], 14, fill=(*CYAN, 120))
-    pil.alpha_composite(glow.filter(ImageFilter.GaussianBlur(14)))
-    d = ImageDraw.Draw(pil, "RGBA")
-    d.rounded_rectangle([px, py, px + pw, py + ph], 14, fill=(255, 255, 255, 255),
-                        outline=(*CYAN, 230), width=2)
-    pil.alpha_composite(img, (px + pad, py + pad))
+    pil.alpha_composite(img, ((W - iw) // 2, (H - ih) // 2 + 20))
     bgr = to_bgr(pil); fade_in(writer, bgr); hold(writer, bgr, 6.0)
 
 def code_card(writer):
