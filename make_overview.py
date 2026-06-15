@@ -171,25 +171,33 @@ def text_card(writer, kick, body, secs=4.6, kcol=CYAN):
     bgr = to_bgr(pil); fade_in(writer, bgr); hold(writer, bgr, secs)
 
 def equation_card(writer):
+    """Show the DFD method diagram (dfd_method.png) on a light panel."""
     pil = bg_layer().convert("RGBA")
-    kicker(pil, "THE DFD GRADIENT", 150)
-    eq = equation_png()
-    eh, ew = eq.shape[:2]
-    scale = min((W - 160) / ew, 1.0)
-    new = (int(ew * scale), int(eh * scale))
-    eq_img = Image.fromarray(eq).resize(new, Image.LANCZOS)
-    # glow behind the equation
-    glow = eq_img.filter(ImageFilter.GaussianBlur(9))
-    x0, y0 = (W - new[0]) // 2, (H - new[1]) // 2 - 10
-    pil.alpha_composite(glow, (x0, y0))
-    pil.alpha_composite(eq_img, (x0, y0))
-    cap_lines = wrap("Evaluate the teacher score at a REAL sample x instead of the "
-                     "student's own output, so the student learns directly from real "
-                     "data to remove over-saturation and restore diversity.",
-                     font(28), W - 260)
-    glow_text(pil, cap_lines, [font(28)] * len(cap_lines),
-              [MUTED] * len(cap_lines), H - 110, glow=BLUE, glow_r=5, line_gap=10)
-    bgr = to_bgr(pil); fade_in(writer, bgr); hold(writer, bgr, 5.6)
+    kicker(pil, "THE DFD METHOD", 90)
+
+    img = Image.open(os.path.join(HERE, "static/images/dfd_method.png")).convert("RGBA")
+    # composite the (transparent) diagram onto white so its dark text is readable
+    white = Image.new("RGBA", img.size, (255, 255, 255, 255))
+    white.alpha_composite(img)
+    img = white
+    iw, ih = img.size
+    avail_w, avail_h = W - 150, H - 230
+    scale = min(avail_w / iw, avail_h / ih)
+    img = img.resize((int(iw * scale), int(ih * scale)), Image.LANCZOS)
+    iw, ih = img.size
+
+    pad = 18
+    px, py = (W - iw) // 2 - pad, (H - ih) // 2 - pad + 20
+    pw, ph = iw + 2 * pad, ih + 2 * pad
+    # cyan glow + white rounded panel
+    glow = Image.new("RGBA", pil.size, (0, 0, 0, 0))
+    ImageDraw.Draw(glow).rounded_rectangle([px, py, px + pw, py + ph], 14, fill=(*CYAN, 120))
+    pil.alpha_composite(glow.filter(ImageFilter.GaussianBlur(14)))
+    d = ImageDraw.Draw(pil, "RGBA")
+    d.rounded_rectangle([px, py, px + pw, py + ph], 14, fill=(255, 255, 255, 255),
+                        outline=(*CYAN, 230), width=2)
+    pil.alpha_composite(img, (px + pad, py + pad))
+    bgr = to_bgr(pil); fade_in(writer, bgr); hold(writer, bgr, 6.0)
 
 def code_card(writer):
     pil = bg_layer().convert("RGBA")
@@ -343,7 +351,7 @@ def main():
               secs=5.0)
 
     # ── Our method ──
-    section_card(vw, "Our Method: Data-Forcing Distillation")
+    section_card(vw, "Data-Forcing Distillation")
     equation_card(vw)
     code_card(vw)
 

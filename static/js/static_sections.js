@@ -233,54 +233,6 @@ const QUANT_TABLES = [
       ],
     },
   },
-  {
-    title: "Scaling up with large batch size (Image-to-Video)",
-    caption: `Models distilled with batch size 16 vs.&nbsp;128, evaluated on the
-      VBench test set. The larger batch yields better temporal stability during large
-      motions and improved physical plausibility.`,
-    table: {
-      cols: ["Batch size","Subject<br>Cons.","Background<br>Cons.","Aesthetic<br>Quality",
-             "Temporal<br>Flicker.","Motion<br>Smooth.","I2V<br>Subject","I2V<br>Background","Average"],
-      rows: [
-        { name:"16",
-          cells:["0.9613",["0.9692"],"0.6371",["0.9759"],"0.9900","0.9859",["0.9930"],"0.9303"] },
-        { name:"128", cls:"qt-ours",
-          cells:[["0.9638"],"0.9685",["0.6383"],"0.9783",["0.9914"],["0.9878"],"0.9929",["0.9316"]] },
-      ],
-    },
-  },
-  {
-    title: "Ablation: effect of the GAN loss (Text-to-Video, animation set)",
-    caption: `Removing the GAN loss yields results comparable to the model distilled
-      with it &mdash; DFD's explicit real-data supervision makes the GAN unnecessary,
-      and dynamic degree even improves.`,
-    table: {
-      cols: ["Model (DFD)","Subject<br>Cons.","Background<br>Cons.","Temporal<br>Flicker.",
-             "Motion<br>Smooth.","Dynamic<br>Degree","Aesthetic<br>Quality","Imaging<br>Quality"],
-      rows: [
-        { name:"w/o GAN", cls:"qt-ours",
-          cells:[["0.9690"],"0.9620","0.9785","0.9899",["0.5000"],"0.7194",["0.7452"]] },
-        { name:"w/ GAN",
-          cells:["0.9666",["0.9625"],["0.9831"],["0.9912"],"0.3750",["0.7213"],"0.7210"] },
-      ],
-    },
-  },
-  {
-    title: "Ablation: gradient mixing weight w (Text-to-Video, animation set)",
-    caption: `Comparing w&nbsp;=&nbsp;&frac12; (our default, DFD&nbsp;+&nbsp;DMD mixture)
-      against w&nbsp;=&nbsp;1 (pure DFD). The differences are small, indicating the
-      method is stable and insensitive to the choice of w.`,
-    table: {
-      cols: ["Model","Subject<br>Cons.","Background<br>Cons.","Temporal<br>Flicker.",
-             "Motion<br>Smooth.","Dynamic<br>Degree","Aesthetic<br>Quality","Imaging<br>Quality"],
-      rows: [
-        { name:"w = 1/2", cls:"qt-ours",
-          cells:[["0.9691"],["0.9661"],"0.9830","0.9907",["0.5625"],"0.7135",["0.7457"]] },
-        { name:"w = 1",
-          cells:["0.9666","0.9625",["0.9831"],["0.9912"],"0.3750",["0.7213"],"0.7210"] },
-      ],
-    },
-  },
 ];
 
 export function mountQuant(root) {

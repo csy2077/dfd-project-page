@@ -1387,3 +1387,67 @@ video {
   background: #000;
 }
 @media (max-width: 600px) { .limit-grid { grid-template-columns: 1fr; } }
+
+/* ═══════════════ TL;DR line ═══════════════ */
+.tldr {
+  max-width: 760px;
+  margin: 2.2rem auto 0;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  font-size: 1.0rem;
+  line-height: 1.6;
+  color: var(--fg);
+  text-align: left;
+}
+.tldr-tag {
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-right: 0.5rem;
+}
+
+/* ═══════════════ Diversity grid (2 × 8) ═══════════════ */
+.dv-intro { color: var(--muted); margin: 0 0 1rem; }
+.dv-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.dv-head {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.4rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.dv-head.is-ours { background: var(--accent); border-color: var(--accent); color: #fff; }
+.dv-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+}
+/* visual divider between the DMD (cols 1-4) and DFD (cols 5-8) halves */
+.dv-cell:nth-child(8n+4) { margin-right: 10px; }
+.dv-cell video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #000;
+}
+.dv-cell:nth-child(8n+5) video,
+.dv-cell:nth-child(8n+6) video,
+.dv-cell:nth-child(8n+7) video,
+.dv-cell:nth-child(8n+0) video { border-color: rgba(37,99,235,0.5); }
+@media (max-width: 760px) {
+  .dv-grid { grid-template-columns: repeat(4, 1fr); }
+  .dv-cell:nth-child(8n+4) { margin-right: 0; }
+}

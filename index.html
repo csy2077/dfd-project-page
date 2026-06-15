@@ -65,15 +65,22 @@
         <div class="teaser-pill-body">A short post-training stage restores diversity and fidelity.</div>
       </div>
       <div class="teaser-pill">
-        <div class="teaser-pill-stat">Improve on DMD on 3 video generation tasks</div>
+        <div class="teaser-pill-stat">Improve on 3 video generation tasks</div>
         <div class="teaser-pill-body">Text-to-video (Wan2.1), image-to-video (Cosmos), and autoregressive generation (Self&nbsp;Forcing).</div>
       </div>
     </div>
+    <p class="tldr">
+      <span class="tldr-tag">TL;DR</span>
+      We introduce real-data supervision into the DMD loss, removing the over-saturation
+      and limited-diversity problems of DMD. With only a single line of code change, we
+      improve on three video generation tasks.
+    </p>
   </header>
 
   <nav class="toc-nav" aria-label="Sections">
     <div class="toc-inner">
       <a href="#overview">Overview</a>
+      <a href="#diversity">Diversity</a>
       <a href="#results-i2v">Image-to-Video</a>
       <a href="#results-ar">Autoregressive</a>
       <a href="#results-t2v">Text-to-Video</a>
@@ -95,12 +102,14 @@
     </figure>
   </section>
 
+  <section id="diversity" class="section section-showcase"><h2>DFD Restores Diversity</h2><div id="diversity-root"></div></section>
+
   <section id="results-i2v" class="section section-showcase"><h2>Image-to-Video Results</h2><div id="results-i2v-root"></div></section>
   <section id="results-ar" class="section section-showcase"><h2>Autoregressive Video Generation Results</h2><div id="results-ar-root"></div></section>
   <section id="results-t2v" class="section section-showcase"><h2>Text-to-Video Results</h2><div id="results-t2v-root"></div></section>
   <section id="abstract" class="section"><h2>Abstract</h2><div id="abstract-root"></div></section>
   <section id="method" class="section"><h2>Method</h2><div id="method-root"></div></section>
-  <section id="ablations" class="section section-showcase"><h2>Ablation Studies</h2><div id="ablations-root"></div></section>
+  <section id="ablations" class="section"><h2>Ablation Studies</h2><div id="ablations-root"></div></section>
   <section id="quant" class="section"><h2>Quantitative Results</h2><div id="quant-root"></div></section>
   <section id="limitation" class="section"><h2>Limitation</h2><div id="limitation-root"></div></section>
   <section id="bibtex" class="section"><h2>BibTeX</h2>

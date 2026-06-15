@@ -1,9 +1,11 @@
 import { makeTaskShowcase } from './showcase.js';
 import { mountAbstract, mountMethod, mountQuant, mountLimitation } from './static_sections.js';
 import { mountAblations } from './ablations_section.js';
+import { mountDiversity } from './diversity_section.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const map = {
+    "diversity-root":   mountDiversity,
     "results-i2v-root": makeTaskShowcase("i2v"),
     "results-ar-root":  makeTaskShowcase("ar"),
     "results-t2v-root": makeTaskShowcase("t2v"),
